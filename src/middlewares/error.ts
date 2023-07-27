@@ -1,21 +1,12 @@
 import type { ErrorHandler } from 'hono'
 import { StatusCode } from 'hono/utils/http-status'
 import httpStatus from 'http-status'
-import { ZodError } from 'zod'
-import { generateErrorMessage, ErrorMessageOptions } from 'zod-error'
 import { getConfig } from '../config/config'
 import { ApiError } from '../utils/ApiError'
 
-const zodErrorOptions: ErrorMessageOptions = {
-  transform: ({ errorMessage, index }) => `Error #${index + 1}: ${errorMessage}`
-}
-
 export const errorConverter = (err: unknown): ApiError => {
   let error = err
-  if (error instanceof ZodError) {
-    const errorMessage = generateErrorMessage(error.issues, zodErrorOptions)
-    error = new ApiError(httpStatus.BAD_REQUEST, errorMessage)
-  } else if (!(error instanceof ApiError)) {
+  if (!(error instanceof ApiError)) {
     const castedErr = (typeof error === 'object' ? error : {}) as Record<string, unknown>
     const statusCode: number =
       typeof castedErr.statusCode === 'number'

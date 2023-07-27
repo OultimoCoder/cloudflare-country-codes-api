@@ -1,3 +1,6 @@
+import { ExecutionContext } from 'hono/dist/types/context'
+import { RequestInit } from 'miniflare'
+import { Request } from 'miniflare'
 import app from '../../src'
 import '../../src/routes'
 
