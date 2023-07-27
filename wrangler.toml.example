@@ -1,4 +1,4 @@
-name = "country-codes-api"
+name = 'country-codes-api'
 main = 'dist/index.mjs'
 
 workers_dev = true
@@ -16,6 +16,6 @@ ENV = 'development'
 ENV = 'production'
 
 [build]
-command = "npm run build"
+command = 'npm run build'
 
 # [secrets]
