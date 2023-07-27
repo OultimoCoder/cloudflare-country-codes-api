@@ -1,0 +1,21 @@
+name = "country-codes-api"
+main = 'dist/index.mjs'
+
+workers_dev = true
+compatibility_date = '2023-07-27'
+account_id=''
+
+[miniflare]
+kv_persist = false
+env_path = '.env.test'
+
+[vars]
+ENV = 'development'
+
+[env.production.vars]
+ENV = 'production'
+
+[build]
+command = "npm run build"
+
+# [secrets]
