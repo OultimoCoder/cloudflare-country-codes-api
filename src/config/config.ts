@@ -18,7 +18,9 @@ export const getConfig = (env: Environment['Bindings']) => {
   if (config) {
     return config
   }
-  const envVars = envVarsSchema.parse({ ...env, CORS_ORIGINS: JSON.parse(env.CORS_ORIGINS) })
+  const corsOrigins = Array
+    .isArray(env.CORS_ORIGINS) ? env.CORS_ORIGINS : JSON.parse(env.CORS_ORIGINS)
+  const envVars = envVarsSchema.parse({ ...env, CORS_ORIGINS: corsOrigins })
   config = {
     env: envVars.ENV,
     cors: {
