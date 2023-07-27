@@ -8,7 +8,7 @@ import { ApiError } from './utils/ApiError'
 
 const app = new Hono<Environment>()
 
-app.use('*', prettyJSON({ space: 4 }))
+app.use('*', prettyJSON({ space: 2 }))
 app.use('*', setCors)
 
 app.notFound(() => {
