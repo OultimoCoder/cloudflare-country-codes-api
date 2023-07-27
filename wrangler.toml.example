@@ -12,9 +12,11 @@ env_path = '.env.test'
 
 [vars]
 ENV = 'development'
+CORS_ORIGINS = ['*']
 
 [env.production.vars]
 ENV = 'production'
+CORS_ORIGINS = ['*']
 
 [build]
 command = 'npm run build'
