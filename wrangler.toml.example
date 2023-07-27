@@ -4,6 +4,7 @@ main = 'dist/index.mjs'
 workers_dev = true
 compatibility_date = '2023-07-27'
 account_id=''
+usage_model = 'bundled'
 
 [miniflare]
 kv_persist = false
