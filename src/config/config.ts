@@ -1,12 +1,15 @@
 import { z } from 'zod'
-import { Environment } from '../../bindings'
 
 const envVarsSchema = z.object({
-  ENV: z.union([z.literal('production'), z.literal('development'), z.literal('test')])
+  ENV: z.union([z.literal('production'), z.literal('development'), z.literal('test')]),
+  CORS_ORIGINS: z.array(z.string()).optional().default(['*']),
 })
 
 export interface Config {
   env: 'production' | 'development' | 'test'
+  cors: {
+    origins: string[]
+  }
 }
 
 let config: Config
@@ -17,7 +20,10 @@ export const getConfig = (env: Environment['Bindings']) => {
   }
   const envVars = envVarsSchema.parse(env)
   config = {
-    env: envVars.ENV
+    env: envVars.ENV,
+    cors: {
+      origins: envVars.CORS_ORIGINS
+    }
   }
   return config
 }

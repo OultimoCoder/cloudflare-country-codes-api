@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
-import { cors } from 'hono/cors'
 import { prettyJSON } from 'hono/pretty-json'
 import httpStatus from 'http-status'
+import { setCors } from './middlewares/cors'
 import { errorHandler } from './middlewares/error'
 import { defaultRoutes } from './routes'
 import { ApiError } from './utils/ApiError'
@@ -9,7 +9,7 @@ import { ApiError } from './utils/ApiError'
 const app = new Hono<Environment>()
 
 app.use('*', prettyJSON({ space: 4 }))
-app.use('*', cors())
+app.use('*', setCors)
 
 app.notFound(() => {
   throw new ApiError(httpStatus.NOT_FOUND, 'Not found')
